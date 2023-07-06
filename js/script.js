@@ -32,7 +32,7 @@ createApp({
           visible: true,
           messages: [
             {
-              date: '20/03/2020 16:30:00',
+              date: '03/20/2020 16:30:00',
               message: 'Ciao come stai?',
               status: 'sent'
             }, 
@@ -166,7 +166,28 @@ createApp({
           ],
         }
       ],
-      currentChat: 0
+      currentChat: 0,
+      textMessage: ''
+    }
+  }, 
+  methods: {
+    sendMessage() {
+      const currentContact = this.contacts[this.currentChat];
+      currentContact.messages.push({
+        date: new Date(),
+        message: this.textMessage,
+        status: 'sent'
+      })
+      
+      this.textMessage = '';
+
+      setTimeout(() => {
+        currentContact.messages.push({
+          date: new Date(),
+          message: 'ok',
+          status: 'received'
+        })
+      }, 1000)
     }
   }
 }).mount('#app')
