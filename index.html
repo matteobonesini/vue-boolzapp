@@ -38,13 +38,13 @@
 
                                 <div class="profile-img">
 
-                                    <img src="img/avatar_1.jpg" alt="">
+                                    <img src="img/avatar_1.jpg" alt="Mat">
 
                                 </div>
 
                                 <div class="profile-name">
 
-                                    <div class="title">Sofia</div>
+                                    <div class="title">Matteo</div>
 
                                 </div>
 
@@ -98,184 +98,16 @@
 
                         <ul>
 
-                            <li class="active">
+                            <li :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts">
                                     <div class="chat-img">
 
-                                        <img src="img/avatar_1.jpg" alt="">
+                                        <img :src="contact.avatar" :alt="contact.name">
 
                                     </div>
 
                                     <div class="chat-name">
 
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                <div class="chat-img">
-
-                                    <img src="img/avatar_1.jpg" alt="">
-
-                                </div>
-
-                                <div class="chat-name">
-
-                                    <div class="title">Michele</div>
-
-                                    <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                </div>
-
-                                <div class="chat-date">
-                                    
-                                    <div class="subtitle">12:00</div>
-
-                                </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
-
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
-
-                                    </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">12:00</div>
-
-                                    </div>
-                            </li>
-                            <li>
-                                    <div class="chat-img">
-
-                                        <img src="img/avatar_1.jpg" alt="">
-
-                                    </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">Michele</div>
+                                        <div class="title">{{ contact.name }}</div>
 
                                         <div class="subtitle underline">Ultimo messaggio inviato</div>
 
