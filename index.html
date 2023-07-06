@@ -98,7 +98,7 @@
 
                         <ul>
 
-                            <li :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts">
+                            <li :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="currentChat = i">
                                     <div class="chat-img">
 
                                         <img :src="contact.avatar" :alt="contact.name">
@@ -136,13 +136,13 @@
 
                                 <div class="profile-img">
 
-                                    <img src="img/avatar_1.jpg" alt="">
+                                    <img :src="contacts[currentChat].avatar" alt="contacts[currentChat].name">
 
                                 </div>
 
                                 <div class="profile-name">
 
-                                    <div class="title">Sofia</div>
+                                    <div class="title">{{ contacts[currentChat].name }}</div>
 
                                     <div class="subtitle">Ultimo accesso oggi alle 12:00</div>
 
@@ -168,111 +168,11 @@
 
                         <div class="messages">
 
-                            <div class="message send">
+                            <div v-for="message in contacts[currentChat].messages" class="message" :class="message.status">
 
-                                Hai portato a spasso il cane?
+                                {{ message.message }}
 
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            
-                            <div class="message send">
-                                
-                                Ricordati di stendere i panni.
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
-
-                            </div>
-                            <div class="message received">
-                                
-                                Tutto fatto
-
-                                <span class="time"> 12:00</span>
+                                <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
 
                             </div>
 
