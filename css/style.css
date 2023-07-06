@@ -131,7 +131,7 @@ body {
     display: flex;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+    border-bottom: 1px solid #E9EBEB;
     cursor: pointer;
 }
 .container aside .aside-bottom ul li.active{
@@ -228,7 +228,26 @@ body {
     bottom: 5px;
     right: 5px;
 }
-
+.container .right-side .text-content .message .dropdown {
+    background-color: white;
+    width: 80%;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 5px 5px 10px 0px rgba(173,173,173,1);
+    position: absolute;
+    z-index: 99;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    display: none;
+}
+.container .right-side .text-content .message .dropdown.active {
+    display: block;
+}
+.container .right-side .text-content .message .dropdown div:last-child {
+    color: rgb(160, 1, 1);
+    margin-top: 10px;
+}
 .container .right-side .bottom-input {
     width: 100%;
     height: calc(var(--top-section-height) / 1.5);

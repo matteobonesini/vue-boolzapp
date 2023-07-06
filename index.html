@@ -164,15 +164,27 @@
 
                     </div>
 
-                    <div class="text-content">
+                    <div class="text-content" @mousedown.left="hideDropdown()">
 
                         <div class="messages">
 
-                            <div v-for="message in contacts[currentChat].messages" class="message" :class="message.status">
+                            <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i)" @contextmenu.prevent>
 
                                 {{ message.message }}
 
                                 <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
+
+                                <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''">
+
+                                    <div class="info">
+                                        Info Messaggio
+                                    </div>
+
+                                    <div class="delete">
+                                        Elimina messaggio
+                                    </div>
+
+                                </div>
 
                             </div>
 

@@ -168,7 +168,8 @@ createApp({
       ],
       currentChat: 0,
       searchInput: '',
-      textMessage: ''
+      textMessage: '',
+      clickedMessageIndex: null
     }
   }, 
   methods: {
@@ -201,6 +202,12 @@ createApp({
         }
       });
 
+    },
+    showDropdown(i) {
+      this.clickedMessageIndex = i
+    },
+    hideDropdown() {
+      this.clickedMessageIndex = null
     }
   }
 }).mount('#app')
