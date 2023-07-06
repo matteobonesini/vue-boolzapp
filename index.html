@@ -88,7 +88,7 @@
 
                             </div>
 
-                            <input type="text" placeholder="Cerca o inizia una nuova chat">
+                            <input type="text" placeholder="Cerca o inizia una nuova chat"  v-model="searchInput" @keyup="searchContacts()">
 
                         </div>
 
@@ -98,7 +98,7 @@
 
                         <ul>
 
-                            <li :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="currentChat = i">
+                            <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="currentChat = i">
                                     <div class="chat-img">
 
                                         <img :src="contact.avatar" :alt="contact.name">

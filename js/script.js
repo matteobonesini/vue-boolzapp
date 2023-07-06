@@ -167,6 +167,7 @@ createApp({
         }
       ],
       currentChat: 0,
+      searchInput: '',
       textMessage: ''
     }
   }, 
@@ -188,6 +189,18 @@ createApp({
           status: 'received'
         })
       }, 1000)
+    },
+    searchContacts() {
+      this.contacts.forEach(contact => {
+        const name = contact.name.toLowerCase();
+        const input = this.searchInput.toLowerCase()
+        if (name.includes(input)) {
+          contact.visible = true;
+        } else {
+          contact.visible = false;
+        }
+      });
+
     }
   }
 }).mount('#app')
