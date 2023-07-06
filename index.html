@@ -5,18 +5,301 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Vue Template</title>
 
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
         <!-- css link -->
         <link rel="stylesheet" href="css/style.css">
 
         <!-- CDN Vue.js -->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
+
     </head>
     <body>
         
         <!-- Vue.js container -->
         <div id="app">
-            {{ message }}
+            
+            <div class="container">
+
+                <!-- left side -->
+                <aside>
+                    <div class="aside-top">
+
+                        <div class="user-bar">
+
+                            <div class="profile">
+
+                                <div class="profile-img">
+
+                                    <img src="img/avatar_1.jpg" alt="">
+
+                                </div>
+
+                                <div class="profile-name">
+
+                                    <div class="title">Sofia</div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="setting">
+
+                                <i class="fa-solid fa-circle-notch"></i>
+
+                                <i class="fa-solid fa-message"></i>
+
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                            </div>
+
+                        </div>
+
+                        <div class="notification">
+
+                            <div class="icon">
+                                
+                                <i class="fa-solid fa-bell-slash"></i>
+
+                            </div>
+
+                            <div class="content">
+
+                                <div class="title">Ricevi notifiche di nuovi messaggi</div>
+
+                                <div class="subtitle underline">Attiva notifiche desktop</div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="search">
+
+                            <div class="input-icon">
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                            </div>
+
+                            <input type="text" placeholder="Cerca o inizia una nuova chat">
+
+                        </div>
+
+                    </div>
+
+                    <div class="aside-bottom">
+
+                        <ul>
+
+                            <li class="active">
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                <div class="chat-img">
+
+                                    <img src="img/avatar_1.jpg" alt="">
+
+                                </div>
+
+                                <div class="chat-name">
+
+                                    <div class="title">Michele</div>
+
+                                    <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                </div>
+
+                                <div class="chat-date">
+                                    
+                                    <div class="subtitle">12:00</div>
+
+                                </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+                            <li>
+                                    <div class="chat-img">
+
+                                        <img src="img/avatar_1.jpg" alt="">
+
+                                    </div>
+
+                                    <div class="chat-name">
+
+                                        <div class="title">Michele</div>
+
+                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+
+                                    </div>
+
+                                    <div class="chat-date">
+                                        
+                                        <div class="subtitle">12:00</div>
+
+                                    </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </aside>
+
+                <!-- right side  -->
+                <div class="right-side">
+
+                </div>
+
+            </div>
+
         </div>
 
         <script src="js/script.js"></script>
