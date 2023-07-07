@@ -1,3 +1,4 @@
+let DateTime = luxon.DateTime;
 const { createApp } = Vue
 
 createApp({
@@ -186,11 +187,15 @@ createApp({
       this.setOnlineUser('')
       this.hideDropdown();
     },
+    getMessageTime(date) {
+      const time = DateTime.fromFormat(date, "LL/dd/yyyy HH:mm:ss");
+      return time.toLocaleString(DateTime.TIME_SIMPLE);
+    },
     sendMessage() {
       this.setOnlineUser('online');
       const currentContact = this.contacts[this.currentChat];
       currentContact.messages.push({
-        date: new Date(),
+        date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
         message: this.textMessage,
         status: 'sent'
       })
@@ -203,7 +208,7 @@ createApp({
 
       setTimeout(() => {
         currentContact.messages.push({
-          date: new Date(),
+          date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
           message: 'ok',
           status: 'received'
         });
@@ -242,9 +247,6 @@ createApp({
       if (messages.length > 0) {
         const length = messages.length;
         let message = messages[length - 1].message;
-        if (message.length > 35) {
-          message = message.slice(0, 35) + '...';
-        };
         return message;
       };
       return '';
@@ -252,8 +254,9 @@ createApp({
     lastMessageTime(messages) {
       if (messages.length > 0) {
         const length = messages.length;
-        const time = new Date(messages[length - 1].date);
-        return time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        const dateString = messages[length - 1].date;
+        const time = DateTime.fromFormat(dateString, "LL/dd/yyyy HH:mm:ss");
+        return time.toLocaleString(DateTime.TIME_SIMPLE);
       };
       return '';
     },
@@ -268,12 +271,16 @@ createApp({
       } else if (online === 'scrivendo') {
         this.onlineUser = 'Sta scrivendo...';
       } else {
-        this.onlineUser = 'Ultimo accesso oggi alle ';
-        const time = this.lastMessageTime(this.contacts[this.currentChat].messages);
-        if (time != '')
-          this.onlineUser += time;
-        else
-          this.onlineUser += '12:00';
+        const length = this.contacts[this.currentChat].messages.length;
+        if (length > 0) {
+          const dateString = this.contacts[this.currentChat].messages[length - 1].date;
+          const time = DateTime.fromFormat(dateString, "LL/dd/yyyy HH:mm:ss");
+          const nowTime = DateTime.now();
+          if (time.toFormat('DDD') == nowTime.toFormat('DDD'))
+            this.onlineUser = 'Ultimo accesso oggi alle ' + time.toFormat('HH:mm');
+          else
+            this.onlineUser = 'Ultimo accesso ' + time.setLocale('it').toFormat('dd LLLL') + ' alle ' + time.toFormat('HH:mm');
+        }
       }
     }
   }

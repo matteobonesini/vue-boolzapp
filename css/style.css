@@ -138,6 +138,7 @@ main {
     padding: 10px;
     border-bottom: 1px solid #E9EBEB;
     cursor: pointer;
+    overflow: hidden;
 }
 .container aside .aside-bottom ul li.active{
     background-color: #E9EBEB;
@@ -147,6 +148,7 @@ main {
     height: 50px;
     border-radius: 25px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 .container aside .aside-bottom ul li .chat-img img {
     width: 100%;
@@ -155,9 +157,16 @@ main {
 .container aside .aside-bottom ul li .chat-name {
     margin: 0 10px;
     flex-grow: 1;
+    overflow: hidden;
+}
+.container aside .aside-bottom ul li .chat-name .subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .container aside .aside-bottom ul li .chat-date {
     align-self: flex-start;
+    flex-shrink: 0;
 }
 
 
@@ -205,21 +214,24 @@ main {
     padding: 10px 40px;
     height: 100%;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 .container .right-side .text-content .message {
     padding: 10px 10px 20px;
-    width: 45%;
+    min-width: 35%;
+    max-width: 70%;
     border-radius: 10px;
     position: relative;
     margin-bottom: 15px;
     cursor: pointer;
 }
 .container .right-side .text-content .message.sent {
-    margin-left: 55%;
+    align-self: flex-end;
     background-color: #D5F9BA;
 }
 .container .right-side .text-content .message.received {
-    margin-right: 55%;
+    align-self: flex-start;
     background-color: white;
 }
 .container .right-side .text-content .message .time {

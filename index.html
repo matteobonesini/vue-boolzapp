@@ -174,7 +174,7 @@
     
                                     {{ message.message }}
     
-                                    <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
+                                    <span class="time">{{ getMessageTime(message.date) }}</span>
     
                                     <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">
     
@@ -219,11 +219,13 @@
                     </div>
     
                 </div>
-                
+
             </main>
 
         </div>
 
+
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>
