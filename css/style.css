@@ -42,6 +42,9 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
+.user-bar i {
+    color: #B1B1B1;
+}
 
 /* LEFT SIDE */
 .container aside {
@@ -75,7 +78,7 @@ body {
     height: 100%;
 }
 .container aside .aside-top .user-bar .setting i:nth-child(2) {
-    margin: 0 10px;
+    margin: 0 20px;
 }
 .container aside .aside-top .notification {
     width: 100%;
@@ -187,7 +190,7 @@ body {
     height: 100%;
 }
 .container .right-side .top .user-bar .setting i:nth-child(2) {
-    margin: 0 10px;
+    margin: 0 20px;
 }
 .container .right-side .text-content {
     height: calc(90vh - (var(--top-section-height) + (var(--top-section-height) / 1.5)));
@@ -201,25 +204,19 @@ body {
     height: 100%;
     overflow: auto;
 }
-.container .right-side .text-content .messages:after {
-    content: "";
-    display: table;
-    clear: both;
-}
 .container .right-side .text-content .message {
     padding: 15px 10px;
     width: 45%;
     border-radius: 10px;
     position: relative;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 .container .right-side .text-content .message.sent {
-    float: right;
     margin-left: 55%;
     background-color: #D5F9BA;
 }
 .container .right-side .text-content .message.received {
-    float: left;
     margin-right: 55%;
     background-color: white;
 }
@@ -229,17 +226,16 @@ body {
     right: 5px;
 }
 .container .right-side .text-content .message .dropdown {
-    background-color: white;
-    width: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    width: 200px;
     border-radius: 5px;
     padding: 15px;
     box-shadow: 5px 5px 10px 0px rgba(173,173,173,1);
-    position: absolute;
+    position: fixed;
     z-index: 99;
-    bottom: 5px;
-    left: 50%;
-    transform: translate(-50%, 100%);
     display: none;
+    cursor: pointer;
 }
 .container .right-side .text-content .message .dropdown.active {
     display: block;

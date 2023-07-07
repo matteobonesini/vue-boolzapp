@@ -23,6 +23,7 @@
     </head>
     <body>
         
+        
         <!-- Vue.js container -->
         <div id="app">
             
@@ -98,7 +99,7 @@
 
                         <ul>
 
-                            <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="currentChat = i">
+                            <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="setCurrentChat(i)">
                                     <div class="chat-img">
 
                                         <img :src="contact.avatar" :alt="contact.name">
@@ -109,13 +110,13 @@
 
                                         <div class="title">{{ contact.name }}</div>
 
-                                        <div class="subtitle underline">Ultimo messaggio inviato</div>
+                                        <div class="subtitle">{{ lastMessage(contact.messages) }}</div>
 
                                     </div>
 
                                     <div class="chat-date">
                                         
-                                        <div class="subtitle">12:00</div>
+                                        <div class="subtitle">{{ lastMessageTime(contact.messages) }}</div>
 
                                     </div>
                             </li>
@@ -152,9 +153,9 @@
 
                             <div class="setting">
 
-                                <i class="fa-solid fa-circle-notch"></i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
 
-                                <i class="fa-solid fa-message"></i>
+                                <i class="fa-solid fa-paperclip"></i>
 
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
 
@@ -164,23 +165,23 @@
 
                     </div>
 
-                    <div class="text-content" @mousedown.left="hideDropdown()">
+                    <div class="text-content" @click="hideDropdown()" @contextmenu.prevent>
 
                         <div class="messages">
 
-                            <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i)" @contextmenu.prevent>
+                            <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
 
                                 {{ message.message }}
 
                                 <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
 
-                                <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''">
+                                <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">
 
                                     <div class="info">
                                         Info Messaggio
                                     </div>
 
-                                    <div class="delete">
+                                    <div class="delete" @click="deleteMessage(i)">
                                         Elimina messaggio
                                     </div>
 
