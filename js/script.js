@@ -173,15 +173,21 @@ createApp({
       dropDownStylePosition: {
         top: 0 + 'px',
         left: 0 + 'px'
-      }
+      },
+      onlineUser: ''
     }
-  }, 
+  },
+  mounted() {
+    this.setOnlineUser('');
+  },
   methods: {
     setCurrentChat(i){
       this.currentChat = i;
-      this.hideDropdown()
+      this.setOnlineUser('')
+      this.hideDropdown();
     },
     sendMessage() {
+      this.setOnlineUser('online');
       const currentContact = this.contacts[this.currentChat];
       currentContact.messages.push({
         date: new Date(),
@@ -192,12 +198,17 @@ createApp({
       this.textMessage = '';
 
       setTimeout(() => {
+        this.setOnlineUser('scrivendo');
+      }, 1000)
+
+      setTimeout(() => {
         currentContact.messages.push({
           date: new Date(),
           message: 'ok',
           status: 'received'
-        })
-      }, 1000)
+        });
+        this.setOnlineUser('');
+      }, 2000)
     },
     searchContacts() {
       this.contacts.forEach(contact => {
@@ -250,6 +261,20 @@ createApp({
       const currentMessages = this.contacts[this.currentChat].messages;
       currentMessages.splice(this.clickedMessageIndex, 1);
       this.hideDropdown();
+    },
+    setOnlineUser(online) {
+      if (online === 'online') {
+        this.onlineUser = 'Online';
+      } else if (online === 'scrivendo') {
+        this.onlineUser = 'Sta scrivendo...';
+      } else {
+        this.onlineUser = 'Ultimo accesso oggi alle ';
+        const time = this.lastMessageTime(this.contacts[this.currentChat].messages);
+        if (time != '')
+          this.onlineUser += time;
+        else
+          this.onlineUser += '12:00';
+      }
     }
   }
 }).mount('#app')

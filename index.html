@@ -23,201 +23,204 @@
     </head>
     <body>
         
-        
         <!-- Vue.js container -->
         <div id="app">
             
-            <div class="container">
+            <main>
 
-                <!-- left side -->
-                <aside>
-                    <div class="aside-top">
-
-                        <div class="user-bar">
-
-                            <div class="profile">
-
-                                <div class="profile-img">
-
-                                    <img src="img/avatar_1.jpg" alt="Mat">
-
-                                </div>
-
-                                <div class="profile-name">
-
-                                    <div class="title">Matteo</div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="setting">
-
-                                <i class="fa-solid fa-circle-notch"></i>
-
-                                <i class="fa-solid fa-message"></i>
-
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-
-                            </div>
-
-                        </div>
-
-                        <div class="notification">
-
-                            <div class="icon">
-                                
-                                <i class="fa-solid fa-bell-slash"></i>
-
-                            </div>
-
-                            <div class="content">
-
-                                <div class="title">Ricevi notifiche di nuovi messaggi</div>
-
-                                <div class="subtitle underline">Attiva notifiche desktop</div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="search">
-
-                            <div class="input-icon">
-
-                                <i class="fa-solid fa-magnifying-glass"></i>
-
-                            </div>
-
-                            <input type="text" placeholder="Cerca o inizia una nuova chat"  v-model="searchInput" @keyup="searchContacts()">
-
-                        </div>
-
-                    </div>
-
-                    <div class="aside-bottom">
-
-                        <ul>
-
-                            <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="setCurrentChat(i)">
-                                    <div class="chat-img">
-
-                                        <img :src="contact.avatar" :alt="contact.name">
-
+                <div class="container">
+    
+                    <!-- left side -->
+                    <aside>
+                        <div class="aside-top">
+    
+                            <div class="user-bar">
+    
+                                <div class="profile">
+    
+                                    <div class="profile-img">
+    
+                                        <img src="img/avatar_io.jpg" alt="Mat">
+    
                                     </div>
-
-                                    <div class="chat-name">
-
-                                        <div class="title">{{ contact.name }}</div>
-
-                                        <div class="subtitle">{{ lastMessage(contact.messages) }}</div>
-
+    
+                                    <div class="profile-name">
+    
+                                        <div class="title">Sofia</div>
+    
                                     </div>
-
-                                    <div class="chat-date">
-                                        
-                                        <div class="subtitle">{{ lastMessageTime(contact.messages) }}</div>
-
-                                    </div>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </aside>
-
-                <!-- right side  -->
-                <div class="right-side">
-
-                    <div class="top">
-
-                        <div class="user-bar">
-
-                            <div class="profile">
-
-                                <div class="profile-img">
-
-                                    <img :src="contacts[currentChat].avatar" alt="contacts[currentChat].name">
-
+    
                                 </div>
-
-                                <div class="profile-name">
-
-                                    <div class="title">{{ contacts[currentChat].name }}</div>
-
-                                    <div class="subtitle">Ultimo accesso oggi alle 12:00</div>
-
+    
+                                <div class="setting">
+    
+                                    <i class="fa-solid fa-circle-notch"></i>
+    
+                                    <i class="fa-solid fa-message"></i>
+    
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+    
                                 </div>
-
+    
                             </div>
-
-                            <div class="setting">
-
-                                <i class="fa-solid fa-magnifying-glass"></i>
-
-                                <i class="fa-solid fa-paperclip"></i>
-
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="text-content" @click="hideDropdown()" @contextmenu.prevent>
-
-                        <div class="messages">
-
-                            <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
-
-                                {{ message.message }}
-
-                                <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
-
-                                <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">
-
-                                    <div class="info">
-                                        Info Messaggio
-                                    </div>
-
-                                    <div class="delete" @click="deleteMessage(i)">
-                                        Elimina messaggio
-                                    </div>
-
+    
+                            <div class="notification">
+    
+                                <div class="icon">
+                                    
+                                    <i class="fa-solid fa-bell-slash"></i>
+    
                                 </div>
-
+    
+                                <div class="content">
+    
+                                    <div class="title">Ricevi notifiche di nuovi messaggi</div>
+    
+                                    <div class="subtitle underline">Attiva notifiche desktop</div>
+    
+                                </div>
+    
                             </div>
-
+    
+                            <div class="search">
+    
+                                <div class="input-icon">
+    
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+    
+                                </div>
+    
+                                <input type="text" placeholder="Cerca o inizia una nuova chat"  v-model="searchInput" @keyup="searchContacts()">
+    
+                            </div>
+    
                         </div>
-
+    
+                        <div class="aside-bottom">
+    
+                            <ul>
+    
+                                <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="setCurrentChat(i)">
+                                        <div class="chat-img">
+    
+                                            <img :src="contact.avatar" :alt="contact.name">
+    
+                                        </div>
+    
+                                        <div class="chat-name">
+    
+                                            <div class="title">{{ contact.name }}</div>
+    
+                                            <div class="subtitle">{{ lastMessage(contact.messages) }}</div>
+    
+                                        </div>
+    
+                                        <div class="chat-date">
+                                            
+                                            <div class="subtitle">{{ lastMessageTime(contact.messages) }}</div>
+    
+                                        </div>
+                                </li>
+    
+                            </ul>
+    
+                        </div>
+                    </aside>
+    
+                    <!-- right side  -->
+                    <div class="right-side">
+    
+                        <div class="top">
+    
+                            <div class="user-bar">
+    
+                                <div class="profile">
+    
+                                    <div class="profile-img">
+    
+                                        <img :src="contacts[currentChat].avatar" alt="contacts[currentChat].name">
+    
+                                    </div>
+    
+                                    <div class="profile-name">
+    
+                                        <div class="title">{{ contacts[currentChat].name }}</div>
+    
+                                        <div class="subtitle">{{ onlineUser }}</div>
+    
+                                    </div>
+    
+                                </div>
+    
+                                <div class="setting">
+    
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+    
+                                    <i class="fa-solid fa-paperclip"></i>
+    
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="text-content" @click="hideDropdown()" @contextmenu.prevent>
+    
+                            <div class="messages">
+    
+                                <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
+    
+                                    {{ message.message }}
+    
+                                    <span class="time">{{ new Date(message.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) }}</span>
+    
+                                    <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">
+    
+                                        <div class="info">
+                                            Info Messaggio
+                                        </div>
+    
+                                        <div class="delete" @click="deleteMessage(i)">
+                                            Elimina messaggio
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="bottom-input">
+    
+                            <div class="emoji">
+    
+                                <i class="fa-regular fa-face-smile"></i>
+    
+                            </div>
+    
+                            <div class="input">
+    
+                                <input type="text" placeholder="Scrivi un messaggio" v-model="textMessage" @keyup.enter="sendMessage()">
+    
+                            </div>
+    
+                            <div class="mic">
+    
+                                <i class="fa-solid fa-microphone"></i>
+    
+                            </div>
+    
+                        </div>
+    
                     </div>
-
-                    <div class="bottom-input">
-
-                        <div class="emoji">
-
-                            <i class="fa-regular fa-face-smile"></i>
-
-                        </div>
-
-                        <div class="input">
-
-                            <input type="text" placeholder="Scrivi un messaggio" v-model="textMessage" @keyup.enter="sendMessage()">
-
-                        </div>
-
-                        <div class="mic">
-
-                            <i class="fa-solid fa-microphone"></i>
-
-                        </div>
-
-                    </div>
-
+    
                 </div>
-
-            </div>
+                
+            </main>
 
         </div>
 
