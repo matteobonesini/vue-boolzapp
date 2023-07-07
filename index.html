@@ -31,7 +31,7 @@
                 <div class="container">
     
                     <!-- left side -->
-                    <aside>
+                    <aside :class="(chatActive) ? 'md-not-active' : 'md-active'">
                         <div class="aside-top">
     
                             <div class="user-bar">
@@ -128,13 +128,17 @@
                     </aside>
     
                     <!-- right side  -->
-                    <div class="right-side">
+                    <div class="right-side" :class="(chatActive) ? 'md-active' : 'md-not-active'">
     
                         <div class="top">
     
                             <div class="user-bar">
     
                                 <div class="profile">
+
+                                    <div class="back-button" @click="chatActive = !chatActive">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </div>
     
                                     <div class="profile-img">
     
@@ -174,6 +178,12 @@
     
                                     {{ message.message }}
     
+                                    <span class="message-option" @click.stop="showDropdown(i, $event)">
+
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                                    </span>
+
                                     <span class="time">{{ getMessageTime(message.date) }}</span>
     
                                     <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">

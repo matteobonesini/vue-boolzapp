@@ -175,7 +175,8 @@ createApp({
         top: 0 + 'px',
         left: 0 + 'px'
       },
-      onlineUser: ''
+      onlineUser: '',
+      chatActive: true
     }
   },
   mounted() {
@@ -184,6 +185,7 @@ createApp({
   methods: {
     setCurrentChat(i){
       this.currentChat = i;
+      this.chatActive = !this.chatActive;
       this.setOnlineUser('')
       this.hideDropdown();
     },
