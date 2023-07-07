@@ -19,7 +19,6 @@
         <!-- CDN Vue.js -->
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-
     </head>
     <body>
         
@@ -186,7 +185,7 @@
 
                                     <span class="time">{{ getMessageTime(message.date) }}</span>
     
-                                    <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownStylePosition">
+                                    <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownPositionStyle">
     
                                         <div class="info">
                                             Info Messaggio
@@ -234,8 +233,11 @@
 
         </div>
 
-
+        <!-- Axios CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Luxon CDN -->
         <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+        <!-- script.js -->
         <script src="js/script.js"></script>
     </body>
 </html>

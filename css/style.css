@@ -20,7 +20,7 @@ main {
 }
 .container {
     width: 80%;
-    height: 90vh;
+    height: 100%;
     margin: 0 auto;
     display: flex;
     -webkit-box-shadow: 10px 5px 20px -5px rgba(0,0,0,0.75);
@@ -124,7 +124,7 @@ main {
     outline: 0;
 }
 .container aside .aside-bottom {
-    height: calc(90vh - 200px);
+    height: calc(100% - 200px);
     overflow: hidden;
 }
 .container aside .aside-bottom ul {
@@ -229,7 +229,7 @@ main {
     margin: 0 20px;
 }
 .container .right-side .text-content {
-    height: calc(90vh - (var(--top-section-height) + (var(--top-section-height) / 1.5)));
+    height: calc(100% - (var(--top-section-height) + (var(--top-section-height) / 1.5)));
     background-image: url('../img/mine.jpg');
     background-repeat: repeat;
     background-size: 400px;
@@ -322,7 +322,17 @@ main {
 
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 450px) {
+    main {
+        padding: 0;
+    }
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
     .container .md-active {
         width: 100%;
         display: block;

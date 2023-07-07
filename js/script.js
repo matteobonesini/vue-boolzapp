@@ -171,12 +171,13 @@ createApp({
       searchInput: '',
       textMessage: '',
       clickedMessageIndex: null,
-      dropDownStylePosition: {
+      dropDownPositionStyle: {
         top: 0 + 'px',
         left: 0 + 'px'
       },
       onlineUser: '',
-      chatActive: true
+      chatActive: true,
+      el: '#app'
     }
   },
   mounted() {
@@ -194,28 +195,34 @@ createApp({
       return time.toLocaleString(DateTime.TIME_SIMPLE);
     },
     sendMessage() {
-      this.setOnlineUser('online');
-      const currentContact = this.contacts[this.currentChat];
-      currentContact.messages.push({
-        date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
-        message: this.textMessage,
-        status: 'sent'
-      })
-      
-      this.textMessage = '';
-
-      setTimeout(() => {
-        this.setOnlineUser('scrivendo');
-      }, 1000)
-
-      setTimeout(() => {
+      if (this.textMessage != '') {
+          this.setOnlineUser('online');
+        const currentContact = this.contacts[this.currentChat];
         currentContact.messages.push({
           date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
-          message: 'ok',
-          status: 'received'
-        });
-        this.setOnlineUser('');
-      }, 2000)
+          message: this.textMessage,
+          status: 'sent'
+        })
+        
+        this.textMessage = '';
+
+        setTimeout(() => {
+          this.setOnlineUser('scrivendo');
+        }, 1000);
+
+        setTimeout(() => {
+          axios.get('https://api.quotable.io/quotes/random').then(response => {
+            currentContact.messages.push({
+              date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
+              message: response.data[0].content,
+              status: 'received'
+            });
+
+            this.setOnlineUser('');
+          });
+          
+        }, 2000);
+      }
     },
     searchContacts() {
       this.contacts.forEach(contact => {
@@ -239,8 +246,8 @@ createApp({
         dropDownX -= 200;
       }
       const dropDownXPercent = (dropDownX * 100) / maxVW;
-      this.dropDownStylePosition.top = dropDownY + 'px';
-      this.dropDownStylePosition.left = dropDownXPercent + '%';
+      this.dropDownPositionStyle.top = dropDownY + 'px';
+      this.dropDownPositionStyle.left = dropDownXPercent + '%';
     },
     hideDropdown() {
       this.clickedMessageIndex = null;
@@ -284,6 +291,7 @@ createApp({
             this.onlineUser = 'Ultimo accesso ' + time.setLocale('it').toFormat('dd LLLL') + ' alle ' + time.toFormat('HH:mm');
         }
       }
-    }
+    },
+
   }
 }).mount('#app')
