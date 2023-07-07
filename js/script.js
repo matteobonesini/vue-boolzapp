@@ -177,7 +177,6 @@ createApp({
       },
       onlineUser: '',
       chatActive: true,
-      el: '#app'
     }
   },
   mounted() {
@@ -205,6 +204,7 @@ createApp({
         })
         
         this.textMessage = '';
+        this.scrollToElement();
 
         setTimeout(() => {
           this.setOnlineUser('scrivendo');
@@ -219,6 +219,7 @@ createApp({
             });
 
             this.setOnlineUser('');
+            this.scrollToElement();
           });
           
         }, 2000);
@@ -292,6 +293,15 @@ createApp({
         }
       }
     },
-
+    scrollToElement() {
+      setTimeout(() => {
+        const elements = document.querySelectorAll('.message');
+        const el = elements[elements.length - 1];
+    
+        if (el) {
+          el.scrollIntoView({behavior: 'smooth'});
+        }
+      }, 1);
+    }
   }
 }).mount('#app')
