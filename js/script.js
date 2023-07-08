@@ -204,7 +204,6 @@ createApp({
         })
         
         this.textMessage = '';
-        this.scrollToElement();
 
         setTimeout(() => {
           this.setOnlineUser('scrivendo');
@@ -219,7 +218,6 @@ createApp({
             });
 
             this.setOnlineUser('');
-            this.scrollToElement();
           });
           
         }, 2000);
@@ -243,8 +241,10 @@ createApp({
       const dropDownY = e.clientY;
       const maxVW = e.view.innerWidth;
       const maxX = maxVW - ((maxVW * 0.1) + 210);
-      if (dropDownX > maxX) {
+      if (e.target.classList.contains('sent') || e.target.offsetParent.classList.contains('sent')) {
         dropDownX -= 200;
+      } else {
+        dropDownX -= 75;
       }
       const dropDownXPercent = (dropDownX * 100) / maxVW;
       this.dropDownPositionStyle.top = dropDownY + 'px';
@@ -272,7 +272,8 @@ createApp({
     },
     deleteMessage(i) {
       const currentMessages = this.contacts[this.currentChat].messages;
-      currentMessages.splice(this.clickedMessageIndex, 1);
+      const index = currentMessages.length - this.clickedMessageIndex - 1;
+      currentMessages.splice(index, 1);
       this.hideDropdown();
     },
     setOnlineUser(online) {
@@ -293,15 +294,5 @@ createApp({
         }
       }
     },
-    scrollToElement() {
-      setTimeout(() => {
-        const elements = document.querySelectorAll('.message');
-        const el = elements[elements.length - 1];
-    
-        if (el) {
-          el.scrollIntoView({behavior: 'smooth'});
-        }
-      }, 1);
-    }
   }
 }).mount('#app')

@@ -173,7 +173,7 @@
     
                             <div class="messages">
     
-                                <div v-for="(message, i) in contacts[currentChat].messages" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
+                                <div v-for="(message, i) in contacts[currentChat].messages.slice().reverse()" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
     
                                     {{ message.message }}
     
