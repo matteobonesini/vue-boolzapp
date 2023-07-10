@@ -47,6 +47,12 @@ main {
 .user-bar i {
     color: #B1B1B1;
 }
+.subtitle.is-writing {
+    color: #00E676;
+}
+.visibility {
+    visibility: hidden;
+}
 
 /* LEFT SIDE */
 .container aside {
@@ -165,8 +171,22 @@ main {
     text-overflow: ellipsis;
 }
 .container aside .aside-bottom ul li .chat-date {
-    align-self: flex-start;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.container aside .aside-bottom ul li .chat-date .unread-messages {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #00E676;
+    text-align: center;
+    line-height: 20px;
+    margin-top: 7px;
+    color: white;
+    font-size: 0.7em;
 }
 
 
@@ -243,7 +263,7 @@ main {
     flex-direction: column-reverse;
 }
 .container .right-side .text-content .message {
-    padding: 10px 25px 20px 10px;
+    padding: 10px 25px 30px 10px;
     min-width: 35%;
     max-width: 70%;
     border-radius: 10px;
@@ -260,7 +280,7 @@ main {
     background-color: white;
 }
 .container .right-side .text-content .message .message-option {
-    padding: 1px 5px;
+    padding: 1px 0px 1px 10px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -271,7 +291,7 @@ main {
 .container .right-side .text-content .message .time {
     position: absolute;
     bottom: 5px;
-    right: 5px;
+    right: 10px;
     pointer-events: none;
 }
 .container .right-side .text-content .message .dropdown {

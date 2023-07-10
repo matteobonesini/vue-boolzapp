@@ -110,7 +110,8 @@
     
                                             <div class="title">{{ contact.name }}</div>
     
-                                            <div class="subtitle">{{ lastMessage(contact.messages) }}</div>
+                                            <div v-if="contact.status === 'Sta scrivendo...'" :class="contact.status === 'Sta scrivendo...' ? 'is-writing' : ''" class="subtitle">Sta scrivendo...</div>
+                                            <div v-else class="subtitle">{{ lastMessage(contact.messages) }}</div>
     
                                         </div>
     
@@ -118,6 +119,13 @@
                                             
                                             <div class="subtitle">{{ lastMessageTime(contact.messages) }}</div>
     
+                                            <div :class="{ 'visibility': !getUnreadMessages(contact.messages, i).unreaded }" 
+                                            class="unread-messages">
+                                            
+                                                {{ getUnreadMessages(contact.messages, i).counter }}
+
+                                            </div>
+
                                         </div>
                                 </li>
     
@@ -141,7 +149,7 @@
     
                                     <div class="profile-img">
     
-                                        <img :src="contacts[currentChat].avatar" alt="contacts[currentChat].name">
+                                        <img :src="contacts[currentChat].avatar" :alt="contacts[currentChat].name">
     
                                     </div>
     
@@ -149,7 +157,7 @@
     
                                         <div class="title">{{ contacts[currentChat].name }}</div>
     
-                                        <div class="subtitle">{{ onlineUser }}</div>
+                                        <div :class="(contacts[currentChat].status === 'Sta scrivendo...') ? 'is-writing' : ''" class="subtitle">{{ contacts[currentChat].status }}</div>
     
                                     </div>
     

@@ -175,18 +175,18 @@ createApp({
         top: 0 + 'px',
         left: 0 + 'px'
       },
-      onlineUser: '',
       chatActive: true,
     }
   },
   mounted() {
-    this.setOnlineUser('');
+    this.contacts[0].status = this.setOnlineUser();
   },
   methods: {
     setCurrentChat(i){
       this.currentChat = i;
       this.chatActive = !this.chatActive;
-      this.setOnlineUser('')
+      this.setUnreadMessages(i);
+      this.contacts[i].status = this.setOnlineUser();
       this.hideDropdown();
     },
     getMessageTime(date) {
@@ -194,19 +194,21 @@ createApp({
       return time.toLocaleString(DateTime.TIME_SIMPLE);
     },
     sendMessage() {
+      const current = this.currentChat;
       if (this.textMessage != '') {
-          this.setOnlineUser('online');
-        const currentContact = this.contacts[this.currentChat];
+        this.contacts[current].status = 'Online';
+        const currentContact = this.contacts[current];
         currentContact.messages.push({
           date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
           message: this.textMessage,
-          status: 'sent'
+          status: 'sent',
+          readed: false
         })
         
         this.textMessage = '';
 
         setTimeout(() => {
-          this.setOnlineUser('scrivendo');
+          this.contacts[current].status = 'Sta scrivendo...';
         }, 1000);
 
         setTimeout(() => {
@@ -214,10 +216,11 @@ createApp({
             currentContact.messages.push({
               date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
               message: response.data[0].content,
-              status: 'received'
+              status: 'received',
+              readed: false
             });
 
-            this.setOnlineUser('');
+            this.contacts[current].status = this.setOnlineUser();
           });
           
         }, 2000);
@@ -276,23 +279,38 @@ createApp({
       currentMessages.splice(index, 1);
       this.hideDropdown();
     },
-    setOnlineUser(online) {
-      if (online === 'online') {
-        this.onlineUser = 'Online';
-      } else if (online === 'scrivendo') {
-        this.onlineUser = 'Sta scrivendo...';
-      } else {
-        const length = this.contacts[this.currentChat].messages.length;
-        if (length > 0) {
-          const dateString = this.contacts[this.currentChat].messages[length - 1].date;
-          const time = DateTime.fromFormat(dateString, "LL/dd/yyyy HH:mm:ss");
-          const nowTime = DateTime.now();
-          if (time.toFormat('DDD') == nowTime.toFormat('DDD'))
-            this.onlineUser = 'Ultimo accesso oggi alle ' + time.toFormat('HH:mm');
-          else
-            this.onlineUser = 'Ultimo accesso ' + time.setLocale('it').toFormat('dd LLLL') + ' alle ' + time.toFormat('HH:mm');
-        }
+    setOnlineUser() {
+      const length = this.contacts[this.currentChat].messages.length;
+      if (length > 0) {
+        const dateString = this.contacts[this.currentChat].messages[length - 1].date;
+        const time = DateTime.fromFormat(dateString, "LL/dd/yyyy HH:mm:ss");
+        const nowTime = DateTime.now();
+        if (time.toFormat('DDD') == nowTime.toFormat('DDD'))
+          return 'Ultimo accesso oggi alle ' + time.toFormat('HH:mm');
+        else
+          return 'Ultimo accesso ' + time.setLocale('it').toFormat('dd LLLL') + ' alle ' + time.toFormat('HH:mm');
       }
     },
+    getUnreadMessages(messages, i) {
+      counter = 0
+      if (i === this.currentChat && this.chatActive === true) {
+        this.setUnreadMessages(i);
+      } else {
+        messages.forEach((msg) => {
+          if(msg.readed === false) {
+            counter++;
+          };
+        });
+      };
+      return {
+        counter,
+        unreaded: counter > 0
+      }
+    },
+    setUnreadMessages(index) {
+      this.contacts[index].messages.map((msg) =>{
+        msg.readed = true;
+      });
+    }
   }
 }).mount('#app')
