@@ -129,8 +129,12 @@ main {
 .container aside .aside-top .search input:focus-visible {
     outline: 0;
 }
-.container aside .aside-bottom {
+.container aside .aside-bottom.with-notification {
     height: calc(100% - 200px);
+    overflow: hidden;
+}
+.container aside .aside-bottom {
+    height: calc(100% - 125px);
     overflow: hidden;
 }
 .container aside .aside-bottom ul {
@@ -280,7 +284,7 @@ main {
     background-color: white;
 }
 .container .right-side .text-content .message .message-option {
-    padding: 1px 0px 1px 10px;
+    padding: 1px 3px 1px 7px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -291,7 +295,7 @@ main {
 .container .right-side .text-content .message .time {
     position: absolute;
     bottom: 5px;
-    right: 10px;
+    right: 13px;
     pointer-events: none;
 }
 .container .right-side .text-content .message .dropdown {
@@ -313,20 +317,8 @@ main {
     color: rgb(160, 1, 1);
     margin-top: 10px;
 }
-.container .right-side .text-content .message .dropdown div:last-child::after {
-    content: "";
-    display: block;
-    width: 64%;
-    height: 1.5px;
-    position: relative;
-    top: 2px;
-    background-color: rgb(160, 1, 1);
-    transform: scaleX(0);
-    transform-origin: bottom left;
-    transition: transform 0.25s ease-out;
-}
-.container .right-side .text-content .message .dropdown div:last-child:hover::after {
-    transform: scaleX(1);
+.container .right-side .text-content .message .dropdown div:last-child:hover {
+    text-decoration: underline;
 }
 .container .right-side .bottom-input {
     width: 100%;
@@ -360,7 +352,7 @@ main {
 }
 
 
-
+/* MEDIA QUERY */
 @media screen and (max-width: 450px) {
     main {
         padding: 0;

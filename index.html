@@ -31,8 +31,9 @@
     
                     <!-- left side -->
                     <aside :class="(chatActive) ? 'md-not-active' : 'md-active'">
+
                         <div class="aside-top">
-    
+                            
                             <div class="user-bar">
     
                                 <div class="profile">
@@ -63,7 +64,7 @@
     
                             </div>
     
-                            <div class="notification">
+                            <div v-show="activateNotification" class="notification">
     
                                 <div class="icon">
                                     
@@ -75,12 +76,13 @@
     
                                     <div class="title">Ricevi notifiche di nuovi messaggi</div>
     
-                                    <div class="subtitle underline">Attiva notifiche desktop</div>
+                                    <div class="subtitle underline" @click="activateNotification = false">Attiva notifiche desktop</div>
     
                                 </div>
     
                             </div>
     
+                            <!-- input to search a contact -->
                             <div class="search">
     
                                 <div class="input-icon">
@@ -95,13 +97,15 @@
     
                         </div>
     
-                        <div class="aside-bottom">
+                        <!-- contact list -->
+                        <div class="aside-bottom" :class="{ 'with-notification': activateNotification }">
     
                             <ul>
     
                                 <li v-show="contact.visible" :class="(i === currentChat) ? 'active' : ''" v-for="(contact, i) in contacts" @click="setCurrentChat(i)">
                                         <div class="chat-img">
     
+                                            <!-- profile image -->
                                             <img :src="contact.avatar" :alt="contact.name">
     
                                         </div>
@@ -110,15 +114,18 @@
     
                                             <div class="title">{{ contact.name }}</div>
     
+                                            <!-- 'Sta scrivendo...' or last message -->
                                             <div v-if="contact.status === 'Sta scrivendo...'" :class="contact.status === 'Sta scrivendo...' ? 'is-writing' : ''" class="subtitle">Sta scrivendo...</div>
-                                            <div v-else class="subtitle">{{ lastMessage(contact.messages) }}</div>
+                                            <div v-else class="subtitle">{{ lastMessage(contact.messages).replace(" <br><br>", "") }}</div>
     
                                         </div>
     
                                         <div class="chat-date">
                                             
+                                            <!-- time -->
                                             <div class="subtitle">{{ lastMessageTime(contact.messages) }}</div>
     
+                                            <!-- unreaded messages counter -->
                                             <div :class="{ 'visibility': !getUnreadMessages(contact.messages, i).unreaded }" 
                                             class="unread-messages">
                                             
@@ -143,7 +150,7 @@
     
                                 <div class="profile">
 
-                                    <div class="back-button" @click="chatActive = !chatActive">
+                                    <div class="back-button" @click="chatActive = false">
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </div>
     
@@ -177,22 +184,27 @@
     
                         </div>
     
+                        <!-- list of message -->
                         <div class="text-content" @click="hideDropdown()" @contextmenu.prevent>
     
                             <div class="messages">
     
                                 <div v-for="(message, i) in contacts[currentChat].messages.slice().reverse()" class="message" :class="message.status" @mouseup.right="showDropdown(i, $event)">
     
-                                    {{ message.message }}
+                                    <!-- message content -->
+                                    <span v-html="message.message"></span>
     
+                                    <!-- message option -->
                                     <span class="message-option" @click.stop="showDropdown(i, $event)">
 
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
 
                                     </span>
 
+                                    <!-- message time -->
                                     <span class="time">{{ getMessageTime(message.date) }}</span>
-    
+
+                                    <!-- dropdown menu -->
                                     <div class="dropdown" :class="(i === clickedMessageIndex) ? 'active' : ''" :style="dropDownPositionStyle">
     
                                         <div class="info">
@@ -211,6 +223,7 @@
     
                         </div>
     
+                        <!-- section to add new message -->
                         <div class="bottom-input">
     
                             <div class="emoji">

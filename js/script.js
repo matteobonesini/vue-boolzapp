@@ -167,16 +167,31 @@ createApp({
           ],
         }
       ],
-      currentChat: 0,
-      searchInput: '',
-      textMessage: '',
-      clickedMessageIndex: null,
+      activateNotification: true,
+      currentChat: 0,  // index of current active chat
+      searchInput: '', // v-model variable of search input
+      textMessage: '', // v-model variable of message input
+      clickedMessageIndex: null, // index of where to show dropdown, if null not show
       dropDownPositionStyle: {
         top: 0 + 'px',
         left: 0 + 'px'
       },
-      chatActive: true,
+      chatActive: true, // variable if show chat messages of contact list in mobile
     }
+  },
+  created() {
+    window.addEventListener("resize", () => {
+      let viewportWidth = window.innerWidth;
+      if (viewportWidth > 992)
+        this.chatActive = true;
+    });
+  },
+  destroyed() {
+    window.addEventListener("resize", () => {
+      let viewportWidth = window.innerWidth;
+      if (viewportWidth > 992)
+        this.chatActive = true;
+    });
   },
   mounted() {
     this.contacts[0].status = this.setOnlineUser();
@@ -184,7 +199,9 @@ createApp({
   methods: {
     setCurrentChat(i){
       this.currentChat = i;
-      this.chatActive = !this.chatActive;
+      if (this.chatActive === false)
+        this.chatActive = true;
+      this.textMessage = '';
       this.setUnreadMessages(i);
       this.contacts[i].status = this.setOnlineUser();
       this.hideDropdown();
@@ -212,14 +229,15 @@ createApp({
         }, 1000);
 
         setTimeout(() => {
-          axios.get('https://api.quotable.io/quotes/random').then(response => {
+          axios.get('https://official-joke-api.appspot.com/jokes/programming/random').then(response => {
+            const message = `${response.data[0].setup} <br><br>  ${response.data[0].punchline}`;
+            
             currentContact.messages.push({
               date: DateTime.now().toFormat("LL/dd/yyyy HH:mm:ss"),
-              message: response.data[0].content,
+              message: message,
               status: 'received',
               readed: false
             });
-
             this.contacts[current].status = this.setOnlineUser();
           });
           
@@ -241,13 +259,17 @@ createApp({
     showDropdown(i, e) {
       this.clickedMessageIndex = i;
       let dropDownX = e.clientX;
-      const dropDownY = e.clientY;
+      let dropDownY = e.clientY;
       const maxVW = e.view.innerWidth;
+      const maxVH = e.view.innerHeight;
       const maxX = maxVW - ((maxVW * 0.1) + 210);
-      if (e.target.classList.contains('sent') || e.target.offsetParent.classList.contains('sent')) {
+      if ((dropDownX + 201) > maxVW && (dropDownX - 201) < 0) {
+        dropDownX = (maxVW - 200) / 2 ;
+      } else if ((dropDownX + 201) > maxVW && (dropDownX - 201) > 0) {
         dropDownX -= 200;
-      } else {
-        dropDownX -= 75;
+      }
+      if ((dropDownY + 100) > maxVH) {
+        dropDownY -= 70;
       }
       const dropDownXPercent = (dropDownX * 100) / maxVW;
       this.dropDownPositionStyle.top = dropDownY + 'px';
@@ -290,9 +312,10 @@ createApp({
         else
           return 'Ultimo accesso ' + time.setLocale('it').toFormat('dd LLLL') + ' alle ' + time.toFormat('HH:mm');
       }
+      return 'Ultimo accesso ieri alle 22:18';
     },
     getUnreadMessages(messages, i) {
-      counter = 0
+      counter = 0;
       if (i === this.currentChat && this.chatActive === true) {
         this.setUnreadMessages(i);
       } else {
@@ -311,6 +334,6 @@ createApp({
       this.contacts[index].messages.map((msg) =>{
         msg.readed = true;
       });
-    }
+    }, 
   }
 }).mount('#app')
